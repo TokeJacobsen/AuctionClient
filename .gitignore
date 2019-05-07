@@ -88,6 +88,8 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+.idea
+
 # Editor-based Rest Client
 .idea/httpRequests
 
@@ -106,6 +108,6 @@ fabric.properties
 # *.ipr
 
 # Sonarlint plugin
-.idea/sonarlint
+/sonarlint
 
 # End of https://www.gitignore.io/api/intellij
