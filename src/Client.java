@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -13,6 +15,7 @@ public class Client
     private int PORT = 1235;
     Scanner userEntry, input;
     PrintWriter output;
+    BufferedReader inputBuf;
 
     private Socket link;
 
@@ -45,6 +48,9 @@ public class Client
         {
             link = new Socket(host, PORT);
             input = new Scanner(link.getInputStream());
+            inputBuf =
+                    new BufferedReader(
+                            new InputStreamReader(link.getInputStream()));
 
             output = new PrintWriter(link.getOutputStream(), true);
             System.out.println("Thank you, " + clientName + "\nYou are now connected to the auction.");
@@ -60,7 +66,7 @@ public class Client
             try
             {
                 System.out.println("\n* Closing connection... *");
-                link.close();					//Step 4.
+                link.close();
             }
             catch(IOException ioEx)
             {
@@ -74,12 +80,12 @@ public class Client
         try{
             output.println(clientName);
 
-            String fromServer = "";
+            String fromServer = inputBuf.readLine();
+            System.out.println(fromServer);
 
-
-            while(true)
+            while(link.isConnected())
             {
-                if(input.hasNext()){
+                if(link.getInputStream().available() > 0){
                     fromServer = input.nextLine();
                     System.out.println(fromServer);
                 }
@@ -96,6 +102,7 @@ public class Client
                 */
 
                 output.println(toServer);
+
 
                 if(fromServer.equals("nu lukker vi lortet")) {
                     closeConnection();
