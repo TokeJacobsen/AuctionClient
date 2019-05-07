@@ -73,16 +73,27 @@ public class Client
     public void run(){
         try{
             output.println(clientName);
+
+            String fromServer = "";
+
+
             while(true)
             {
-                String fromServer = input.nextLine();
-                System.out.println(fromServer);
-
-                while(!userEntry.hasNextInt() || userEntry.nextInt() < 0){
-                    System.out.println("Please type a valid, positive integer");
+                if(input.hasNext()){
+                    fromServer = input.nextLine();
+                    System.out.println(fromServer);
                 }
 
                 String toServer = userEntry.nextLine();
+
+                /*
+                while(!userEntry.hasNextInt() || userEntry.nextInt() < 0){
+                    System.out.println("Please type a valid, positive integer");
+                    userEntry.nextLine();
+                }
+
+                String toServer = userEntry.nextLine();
+                */
 
                 output.println(toServer);
 
