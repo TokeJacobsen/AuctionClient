@@ -85,12 +85,8 @@ public class Client
 
             while(link.isConnected())
             {
-                if(link.getInputStream().available() > 0){
-                    fromServer = input.nextLine();
-                    System.out.println(fromServer);
-                }
-
                 String toServer = userEntry.nextLine();
+                output.println(toServer);
 
                 /*
                 while(!userEntry.hasNextInt() || userEntry.nextInt() < 0){
@@ -101,8 +97,10 @@ public class Client
                 String toServer = userEntry.nextLine();
                 */
 
-                output.println(toServer);
-
+                if(link.getInputStream().available() > 0){
+                    fromServer = input.nextLine();
+                    System.out.println(fromServer);
+                }
 
                 if(fromServer.equals("nu lukker vi lortet")) {
                     closeConnection();
